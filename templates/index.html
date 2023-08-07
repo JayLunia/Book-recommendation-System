@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+{% if title %}
+{{title}}
+
+{% else %}
+index
+{% endif %}
+
+{% endblock title %}
+
+
+{% block body %}
+
+<main class="container-fluid">
+    <div class="bg-danger text-center text-white p-3 fs-3 fs-md-1">
+        {{title}} 
+        <div class="badge bg-success ms-auto fs-5 fw-normal">total books {{b|length}}</div> 
+    </div>
+    <div class="p-3 p-md-5 row row-cols-1 row-cols-md-3 row-cols-lg-4 gx-3 gy-5  align-items-center">
+        {% for book in b %}
+            <div class="col text-center">
+                <div class="book-card rounded-2 border border-2 border-secondary">
+
+                    <a class="text-decoration-none d-flex " href="{{url_for('pred',title=book[1])}}">
+                        <img src="{{book[5]}}" class="img-fluid me-3">
+                        <div class="content text-start">
+                            {% if book[1]|length<=15 %}
+                            <p class='text-white p-0 fs-3'>{{book[1]}}</p>
+                            {% else %}
+                            <p class='text-white p-0 fs-3'>{{book[1][:15]}}...</p>
+                            {% endif %}
+                            <p class='text-white p-0'>Author: <span class="text-muted">{{book[2]}}</span> </p>
+                            <p class='text-white p-0'>Year: <span class="text-muted">{{book[3]}}</span> </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div id="res" class="text-center">
+</main>
+
+
+   
+</div>
+
+{% endblock body %}
