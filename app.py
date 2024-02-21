@@ -1,4 +1,5 @@
-from flask import Flask , render_template , request
+from flask import Flask , render_template , request, jsonify
+
 import pandas as pd
 import numpy as np
 import pickle
@@ -26,9 +27,17 @@ def index():
     b=np.array(books.sort_values('title'))
     return render_template('index.html',title='Book Recommendation',b=b)
 
+
+# Add this route to your app.py
+@app.route('/search', methods=['POST'])
+def search():
+    query = request.form['query']
+    suggestions = books[books['title'].str.contains(query, case=False, na=False)].head(5).to_json(orient='records')
+    return jsonify(suggestions)
+
+
 @app.route("/book/<title>")
 def pred(title):    
-    print(title)
     book=recommend_books(title)
     b=np.array(book.sort_values('title'))
     b_self=np.array(books[books.title==title])

@@ -24,6 +24,7 @@ body{
 }
 
 main{
+  min-height: 100vh;
   position: absolute;
   top: 0;
   background-color: rgba(0, 0, 0, 0.75);
@@ -39,4 +40,18 @@ main{
   transition: transform 0.3s ease-in-out;
   background-color: black;
   box-shadow: 2px 3px 7px 1px rgba(255, 255, 255, 0.5 );
+}
+
+#search-input{
+  background-color: transparent;
+  color: white;
+  font-weight: 300;
+  font-size: large;
+  outline: 1px solid #dc3545;
+  border: none;
+}
+
+#search-input:focus{
+  outline: 3px solid #dc3545;
+
 }
